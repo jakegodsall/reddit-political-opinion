@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# python
+venv/
+.ipynb_checkpoints/
+
+# project-specific
+data/
