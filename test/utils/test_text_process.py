@@ -32,3 +32,16 @@ def test_replace_url(input_text, expected_text):
     processor = TextProcessor()
     result = processor._replace_url(input_text, "") == expected_text
     assert result
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    ("This is a tweet! #HASHTAG #tweet", "This is a tweet! HASHTAG tweet"),
+    ("I just love #coffee in the morning. Best start to the day!", "I just love coffee in the morning. Best start to the day!"),
+    ("Stunning sunset at the beach #Nature #Beautiful", "Stunning sunset at the beach Nature Beautiful")
+])
+def test_replace_hashtag(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._replace_hashtag(input_text) == expected_text
+    assert result
+
+
+@
