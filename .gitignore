@@ -4,6 +4,8 @@
 # python
 venv/
 .ipynb_checkpoints/
+__pycache__/
+*.pyc
 
 # project-specific
-data/
+*.csv
