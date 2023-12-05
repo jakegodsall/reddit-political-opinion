@@ -21,3 +21,14 @@ def test_lowercasing(input_text, expected_text):
 def test_demojize(input_text, expected_text):
     processor = TextProcessor()
     result = processor._demojize(input_text) == expected_text
+    assert result
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    ("Check out the latest news on our website: https://www.example.com/news", "Check out the latest news on our website: "),
+    ("Learn programming at https://www.code-academy.com", "Learn programming at "),
+    ("For support, visit https://support.example.net/help", "For support, visit ")
+])
+def test_replace_url(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._replace_url(input_text, "") == expected_text
+    assert result

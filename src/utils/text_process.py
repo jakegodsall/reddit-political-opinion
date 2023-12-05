@@ -9,8 +9,8 @@ nltk.download("wordnet")
 
 class TextProcessor:
 
-    url_pattern = re.compile("(http|https):\/\/\S+")
-    hashtag_pattern = re.compile("#+")
+    url_pattern = re.compile(r"https?://\S+")
+    hashtag_pattern = re.compile(r"#+")
 
     def __init__(self):
         self.stopwords = set(stopwords.words("english"))
@@ -31,5 +31,4 @@ class TextProcessor:
     
     def _replace_hashtag(self, text, default_replace=""):
         return re.sub(TextProcessor.hashtag_pattern, default_replace, text)
-    
     
