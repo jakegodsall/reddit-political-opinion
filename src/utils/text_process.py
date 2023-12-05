@@ -106,6 +106,14 @@ class TextProcessor:
     def _reduce_punctuation_repetition(self, text, num_retained=1):
         """
         Reduce repetitions of punctuation in the text to a specified number.
+
+        Args:
+            text (str): The text containing punctuation repetitions.
+            num_retained (int, optional): Number of punctuation occurrences to retain. Defaults to 1.
+
+        Returns:
+            str: The text with punctuation repetitions reduced.
+
         """
         replace_pattern = ""
 
@@ -116,3 +124,5 @@ class TextProcessor:
 
 
         return re.sub(TextProcessor.punctuation_repetition_pattern, replace_pattern, text)
+    
+    
