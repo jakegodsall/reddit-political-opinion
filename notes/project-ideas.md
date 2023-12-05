@@ -21,3 +21,7 @@
 ###### Predictive Modelling
 
 -   Can you predict the popularity of a comment or post based on its content?
+
+### Assumptions
+
+-   Data is all English language.
