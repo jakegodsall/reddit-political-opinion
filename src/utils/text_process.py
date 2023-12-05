@@ -11,6 +11,7 @@ class TextProcessor:
     url_pattern = re.compile(r"https?://\S+")
     hashtag_pattern = re.compile(r"#+")
     repetition_pattern = re.compile(r"([a-zA-Z])\1{2,}")
+    punctuation_repetition_pattern = re.compile(r'([^\w\s])\1+')
 
     def __init__(self):
         """
@@ -102,3 +103,16 @@ class TextProcessor:
 
         return re.sub(TextProcessor.repetition_pattern, replace_pattern, text)
     
+    def _reduce_punctuation_repetition(self, text, num_retained=1):
+        """
+        Reduce repetitions of punctuation in the text to a specified number.
+        """
+        replace_pattern = ""
+
+        if (num_retained > 0 and int(num_retained) == num_retained):
+            replace_pattern += r"\1" * num_retained
+        else:
+            num_retained = 1
+
+
+        return re.sub(TextProcessor.punctuation_repetition_pattern, replace_pattern, text)

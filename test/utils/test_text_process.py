@@ -76,3 +76,13 @@ def test_reduce_repetition_3(input_text, expected_text):
     processor = TextProcessor()
     result = processor._reduce_repetition(input_text, 3) == expected_text
     assert result, f"Result of the test {processor._reduce_repetition(input_text, 1)}"
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    ("Testing!!!!!", "Testing!"),
+    ("What do you think???", "What do you think?"),
+    ("Da)))))", "Da)")
+])
+def test_reduce_punctuation_repetition_1(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._reduce_punctuation_repetition(input_text, 1) == expected_text
+    assert result
