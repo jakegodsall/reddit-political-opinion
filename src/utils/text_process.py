@@ -92,14 +92,13 @@ class TextProcessor:
         Returns:
             str: The text with character repetitions reduced.
         """
-        replace_pattern = r""
+        replace_pattern = ""
 
-        match num_retained:
-            case 1: 
-                replace_pattern = r"\1"
-            case 2:
-                replace_pattern = r"\1\1"
-            case 3:
-                replace_pattern = r"\1\1\1"
+        if (num_retained > 0 and int(num_retained) == num_retained):
+            replace_pattern += r"\1" * num_retained
+        else:
+            num_retained = 2
+
 
         return re.sub(TextProcessor.repetition_pattern, replace_pattern, text)
+    
