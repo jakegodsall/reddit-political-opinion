@@ -2,14 +2,17 @@ import pytest
 
 from src.utils.text_process import TextProcessor
 
+@pytest.fixture(scope="module")
+def processor():
+    return TextProcessor()
+
 
 @pytest.mark.parametrize("input_text, expected_text", [
     ("Hello", "hello"),
     ("This is A STRING", "this is a string"),
     ("Test324", "test324")
 ])
-def test_lowercasing(input_text, expected_text):
-    processor = TextProcessor()
+def test_lowercasing(processor, input_text, expected_text):
     result = processor._to_lowercase(input_text) == expected_text
     assert result
 
@@ -18,8 +21,7 @@ def test_lowercasing(input_text, expected_text):
     ("Had a great time at the beach today! 🌊🏖️", "Had a great time at the beach today! :water_wave::beach_with_umbrella:"),
     ("I need to work out more 🏋️‍♂️💪", "I need to work out more :man_lifting_weights::flexed_biceps:")
 ])  
-def test_demojize(input_text, expected_text):
-    processor = TextProcessor()
+def test_demojize(processor, input_text, expected_text):
     result = processor._demojize(input_text) == expected_text
     assert result
 
@@ -28,8 +30,7 @@ def test_demojize(input_text, expected_text):
     ("Learn programming at https://www.code-academy.com", "Learn programming at "),
     ("For support, visit https://support.example.net/help", "For support, visit ")
 ])
-def test_replace_url(input_text, expected_text):
-    processor = TextProcessor()
+def test_replace_url(processor, input_text, expected_text):
     result = processor._replace_url(input_text, "") == expected_text
     assert result
 
@@ -38,8 +39,7 @@ def test_replace_url(input_text, expected_text):
     ("I just love #coffee in the morning. Best start to the day!", "I just love coffee in the morning. Best start to the day!"),
     ("Stunning sunset at the beach #Nature #Beautiful", "Stunning sunset at the beach Nature Beautiful")
 ])
-def test_replace_hashtag(input_text, expected_text):
-    processor = TextProcessor()
+def test_replace_hashtag(processor, input_text, expected_text):
     result = processor._replace_hashtag(input_text) == expected_text
     assert result
 
@@ -50,8 +50,7 @@ def test_replace_hashtag(input_text, expected_text):
     ("Yessssss!!!", "Yes!!!"),
     ("Whaaaaaat???", "What???")
 ])
-def test_reduce_repetition_1(input_text, expected_text):
-    processor = TextProcessor()
+def test_reduce_repetition_1(processor, input_text, expected_text):
     result = processor._reduce_repetition(input_text, 1) == expected_text
     assert result, f"Result of the test {processor._reduce_repetition(input_text, 1)}"
 
@@ -61,8 +60,7 @@ def test_reduce_repetition_1(input_text, expected_text):
     ("Yessssss!!!", "Yess!!!"),
     ("Whaaaaaat???", "Whaat???")
 ])
-def test_reduce_repetition_2(input_text, expected_text):
-    processor = TextProcessor()
+def test_reduce_repetition_2(processor, input_text, expected_text):
     result = processor._reduce_repetition(input_text, 2) == expected_text
     assert result, f"Result of the test {processor._reduce_repetition(input_text, 1)}"
 
@@ -72,8 +70,7 @@ def test_reduce_repetition_2(input_text, expected_text):
     ("Yessssss!!!", "Yesss!!!"),
     ("Whaaaaaat???", "Whaaat???")
 ])
-def test_reduce_repetition_3(input_text, expected_text):
-    processor = TextProcessor()
+def test_reduce_repetition_3(processor, input_text, expected_text):
     result = processor._reduce_repetition(input_text, 3) == expected_text
     assert result, f"Result of the test {processor._reduce_repetition(input_text, 1)}"
 
@@ -82,8 +79,7 @@ def test_reduce_repetition_3(input_text, expected_text):
     ("What do you think???", "What do you think?"),
     ("Da)))))", "Da)")
 ])
-def test_reduce_punctuation_repetition_1(input_text, expected_text):
-    processor = TextProcessor()
+def test_reduce_punctuation_repetition_1(processor, input_text, expected_text):
     result = processor._reduce_punctuation_repetition(input_text, 1) == expected_text
     assert result
 
@@ -92,8 +88,7 @@ def test_reduce_punctuation_repetition_1(input_text, expected_text):
     (["This", "is", ":", "a", "sentence", "!"], ["This", "is", "a", "sentence"]),
     (["!"], []),
 ])
-def test_remove_punct(input_text, expected_text):
-    processor = TextProcessor()
+def test_remove_punct(processor, input_text, expected_text):
     result = processor._remove_punct(input_text) == expected_text
     assert result
 
@@ -102,8 +97,7 @@ def test_remove_punct(input_text, expected_text):
     (["This", "is11", "a"], ["This", "a"]),
     (["Hello", ":", "World!"], ["Hello"])
 ])
-def test_retain_alpha(input_text, expected_text):
-    processor = TextProcessor()
+def test_retain_alpha(processor, input_text, expected_text):
     result = processor._retain_alpha(input_text) == expected_text
     assert result
 
@@ -111,7 +105,6 @@ def test_retain_alpha(input_text, expected_text):
 @pytest.mark.parametrize("input_text, expected_text", [
     (["My", "name", "is", "Jake"], ["My", "name", "Jake"])
 ])
-def test_remove_stopwords(input_text, expected_text):
-    processor = TextProcessor()
+def test_remove_stopwords(processor, input_text, expected_text):
     result = processor._remove_stopwords(input_text) == expected_text
     assert result
