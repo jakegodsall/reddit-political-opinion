@@ -79,7 +79,7 @@ class TextProcessor:
         Returns:
             str: The lowercase version of the input text.
         """
-        return text.lower()
+        return str(text).lower()
 
     def _demojize(self, text):
         """
@@ -237,8 +237,8 @@ class TextProcessor:
             list[str]: The token list with stopwords removed.
         """
         stops = set(stopwords.words("english"))
-        stops.discar("not")
-        return [token for token in token_list if token not in stopwords]
+        stops.discard("not")
+        return [token for token in token_list if token not in stops]
 
     def _stem(self, tokens, stemmer_type="porter"):
         """
