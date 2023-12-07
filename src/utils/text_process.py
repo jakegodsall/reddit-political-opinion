@@ -213,9 +213,9 @@ class TextProcessor:
         """
         return [token for token in token_list if token not in string.punctuation]
 
-    def _retain_alnum(self, token_list):
+    def _retain_alpha(self, token_list):
         """
-        Filters the token list to retain only alphanumeric tokens.
+        Filters the token list to retain only alphabetic tokens.
 
         Args:
             token_list (list[str]): A list of tokens.

@@ -86,3 +86,32 @@ def test_reduce_punctuation_repetition_1(input_text, expected_text):
     processor = TextProcessor()
     result = processor._reduce_punctuation_repetition(input_text, 1) == expected_text
     assert result
+
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    (["This", "is", ":", "a", "sentence", "!"], ["This", "is", "a", "sentence"]),
+    (["!"], []),
+])
+def test_remove_punct(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._remove_punct(input_text) == expected_text
+    assert result
+
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    (["This", "is11", "a"], ["This", "a"]),
+    (["Hello", ":", "World!"], ["Hello"])
+])
+def test_retain_alpha(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._retain_alpha(input_text) == expected_text
+    assert result
+
+
+@pytest.mark.parametrize("input_text, expected_text", [
+    (["My", "name", "is", "Jake"], ["My", "name", "Jake"])
+])
+def test_remove_stopwords(input_text, expected_text):
+    processor = TextProcessor()
+    result = processor._remove_stopwords(input_text) == expected_text
+    assert result
