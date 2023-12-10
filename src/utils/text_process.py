@@ -58,7 +58,7 @@ class TextProcessor:
         tokens = self._remove_punct(tokens)
 
         # Retain only alphanumeric tokens
-        tokens = self._retain_alnum(tokens)
+        tokens = self._retain_alpha(tokens)
 
         # Remove stopwords
         tokens = self._remove_stopwords(tokens)
